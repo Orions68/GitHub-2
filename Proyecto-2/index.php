@@ -1,6 +1,6 @@
 <?php
 include "includes/conn.php";
-$title = "Índice la de WEB";
+$title = "Índice de la WEB";
 include "includes/header.php";
 ?>
 <section class="container-fluid pt-3">
