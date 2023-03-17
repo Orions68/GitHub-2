@@ -19,15 +19,14 @@ function fibonacci($n)
  
   for($i = 2; $i <= $n; $i++)
     {
-        $fibonacci[$i] = $fibonacci[$i - 1] + $fibonacci[$i - 2];
-        echo $fibonacci[3];
+        $fibonacci[] = $fibonacci[$i - 1] + $fibonacci[$i - 2];
         echo $fibonacci[$i] . "<br>";
+        // echo decbin($fibonacci[$i]) . "<br>";
+        // echo dechex($fibonacci[$i]) . "<br>";
     }
-    print_r ($fibonacci);
 }
  
-fibonacci(10);
- 
+fibonacci(15);
 ?>
                 </div>
             </div>
