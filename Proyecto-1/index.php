@@ -27,8 +27,6 @@ include "includes/header.php";
     {
         $fibonacci[] = $fibonacci[$i - 1] + $fibonacci[$i - 2];
         echo "<h3>$fibonacci[$i]</h3>";
-        // echo decbin($fibonacci[$i]) . "<br>";
-        // echo dechex($fibonacci[$i]) . "<br>";
     }
     echo "<br><br><br><br>";
 }
