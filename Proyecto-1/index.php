@@ -17,20 +17,20 @@ include "includes/header.php";
                         <input type="submit" value="Muestrame estos Valores">
                     </form>
                     <?php
- if (isset($_POST["number"]))
-{
-    $n = $_POST["number"];
-    $fibonacci  = [0, 1];
-    echo "<h3>$fibonacci[0]</h3><h3>$fibonacci[1]</h3>";
- 
-    for($i = 2; $i <= $n; $i++)
-    {
-        $fibonacci[] = $fibonacci[$i - 1] + $fibonacci[$i - 2];
-        echo "<h3>$fibonacci[$i]</h3>";
-    }
-    echo "<br><br><br><br>";
-}
-?>
+                    if (isset($_POST["number"]))
+                    {
+                        $n = $_POST["number"];
+                        $fibonacci  = [0, 1];
+                        echo "<h3>$fibonacci[0]</h3><h3>$fibonacci[1]</h3>";
+                    
+                        for($i = 2; $i <= $n; $i++)
+                        {
+                            $fibonacci[] = $fibonacci[$i - 1] + $fibonacci[$i - 2];
+                            echo "<h3>$fibonacci[$i]</h3>";
+                        }
+                        echo "<br><br><br><br>";
+                    }
+                    ?>
                 </div>
             </div>
         <div class="col-md-1"></div>
