@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 14 - Formulario</title>
+</head>
+<body>
+    <form action="test.php" method="post">
+        <label><strong>Nombre:</strong> <input type="text" name="name"></label>
+        <br><br>
+        <label><strong>Apellidos:</strong> <input type="text" name="surname"></label>
+        <br><br>
+        <label><strong>Correo Electrónico:</strong> <input type="email" name="email"></label>
+        <br><br>
+        <label><strong>Población:</strong> <input type="text" name="city"></label>
+        <br><br>
+        <label><strong>Provincia:</strong> <input type="text" name="province"></label>
+        <br><br>
+        <pre>
+<strong>Edad:</strong>               <strong>¿Cómo nos Conociste?</strong>
+<label><input type="radio" name="age" value="0-20"> <strong>0-20</strong></label>               <label><input type="checkbox" name="forma1" value="forma1"> <strong>A través de un Amigo</strong></label>
+<label><input type="radio" name="age" value="20-40" checked="checked"> <strong>20-40</strong></label>              <label><input type="checkbox" name="forma2" value="forma2"> <strong>A través de un Buscador</strong></label>
+<label><input type="radio" name="age" value="40-60"> <strong>40-60</strong></label>              <label><input type="checkbox" name="forma3" value="forma3"> <strong>Navegando por la Red</strong></label>
+<label><input type="radio" name="age" value="60-100"> <strong>60-100</strong></label>             <label><input type="checkbox" name="forma4" value="forma4"> <strong>Otros</strong></label>
+        </pre>
+        <br>
+        <input type="submit" value="Envia el Formulario">
+        <input type="reset" value="Borra el Formulario">
+    </form>
+</body>
+</html>

@@ -1,0 +1,42 @@
+body
+{
+    background-color: yellow;
+    background-image: url("../img/notepad.jpg");
+    background-repeat: repeat-y;
+    padding-left: 128px;
+    padding-top: 20px;
+}
+
+h1
+{
+    width: 90%;
+    background-color: blue;
+    border: 5px solid white;
+}
+
+h2
+{
+    width: 93%;
+    background-color: red;
+}
+
+ul
+{
+    width: 94%;
+    background-color: lightblue;
+}
+
+li
+{
+    width: 89%;
+    border: dashed 3px blue;
+    padding: 16px;
+    padding-left: 45;
+    margin: 6px;
+    background-color: white;
+}
+
+div p
+{
+    margin-left: 38px;
+}

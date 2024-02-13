@@ -1,0 +1,13 @@
+#titulo { color: darkcyan;}
+p {color: black;}
+div p { color: olive;}
+strong, th { color: red;}
+#especial { color: fuchsia;}
+a { color: red;}
+div p a { color: green;}
+h2, em, caption { color: blue;}
+ins { color: blueviolet;}
+.destacado, td strong { color: orange;}
+.especial { color: orange;}
+tr td { color: green;}
+td em { color: green}

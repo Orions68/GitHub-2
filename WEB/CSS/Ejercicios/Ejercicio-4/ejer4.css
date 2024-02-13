@@ -1,0 +1,74 @@
+body
+{
+    background-color: rgb(206, 198, 180);
+}
+
+.cabecera
+{
+    color: white;
+    background-color: green;
+    text-align: right;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: xx-small;
+    text-transform: uppercase;
+}
+
+h1
+{
+    margin-top: -9;
+    background-color: rgb(201, 134, 75);
+    font-family: Arial, Helvetica, sans-serif;
+    font-variant: small-caps;
+    text-decoration: underline;
+    text-align: center;
+    letter-spacing: 5px;
+    word-spacing: 5px;
+}
+
+.intro
+{
+    border-left: dotted 5px rgb(113, 184, 113);
+    border-right: dotted 5px rgb(113, 184, 113);
+    margin-left: 20%;
+    margin-right: 20%;
+    text-indent: 2em;
+    font-family: cursive;
+    padding: 10px;
+}
+
+h2
+{
+    margin-top: 0;
+    background-color: rgb(120, 76, 76);
+    text-indent: 1em;
+}
+
+.par
+{
+    background-color: rosybrown;
+    border: 3px solid rgb(120, 76, 76);
+    margin-left: 35%;
+    font-family: Arial, Helvetica, sans-serif;
+    text-indent: 2em;
+}
+
+.impar h2
+{
+    background-color: green;
+    margin-left: 0px;
+    text-indent: 1em;
+}
+
+.impar
+{
+    border: 3px solid green;
+    background-color: lightgreen;
+    text-indent: 2em;
+}
+
+address
+{
+    margin-top: 10px;
+    border-top: 5px double;
+    background-color: rosybrown;
+}

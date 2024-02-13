@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 15 - Rellena tu CV</title>
+</head>
+<body>
+    <h1>Rellena tu CV</h1>
+    <form action="test.php" method="post">
+        <fieldset>
+            <legend><strong>Datos Personales</strong></legend>
+            <label><strong>Provincia:</strong>
+                <br>
+                <select name="province">
+                    <option value="">- Selecciona -</option>
+                    <option value="BA">Buenos Aires</option>
+                    <option value="Tf">Santa Cruz de Tenerife</option>
+                </select>
+            </label>
+            <br><br>
+            <label><strong>Fecha de Nacimiento:</strong></label>
+                <br>
+                <!-- <input type="number" name="bday" size="1"><label> de </label> -->
+                <input type="text" name="bday" size="1"><label> de </label>
+                <select name="month">
+                    <option value="Enero">Enero</option>
+                    <option value="Febrero">Febrero</option>
+                    <option value="Marzo">Marzo</option>
+                    <option value="Abril">Abril</option>
+                    <option value="Mayo">Mayo</option>
+                </select>
+                <label> de </label>
+                <!-- <input type="number" name="year" size="2"> -->
+                <input type="text" name="year" size="3">
+                <br><br>
+                <label><strong>Temas de Interés</strong></label>
+                <br>
+                <select name="themes" size="5">
+                    <option>Administración de bases de datos</option>
+                    <option>Análisis y programación</option>
+                    <option>Arquitectura</option>
+                    <option>Calidad</option>
+                    <option>ERP, CRM. Business Inteligence</option>
+                    <option>Uno</option>
+                    <option>Dos</option>
+                    <option>Tres</option>
+                    <option>Cuatro</option>
+                    <option>Cinco</option>
+                </select>
+        </fieldset>
+    </form>
+</body>
+</html>

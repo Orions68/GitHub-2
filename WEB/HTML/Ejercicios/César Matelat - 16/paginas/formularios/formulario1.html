@@ -1,0 +1,38 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario1</title>
+</head>
+<body>
+    <form>
+        <fieldset>
+            <legend>Datos Personales</legend>
+            <label>Nombre y Apellidos </label><input type="text" name="username">
+            <br>
+            <label>Situación Laboral </label><select name="situation">
+                <option value="1" selected="select">Estudiante</option>
+                <option value="2">En Paro</option>
+                <option value="3">En Activo</option>
+                <option value="4">Jubilado</option>
+            </select>
+            <br>
+            <label><input type="radio" name="age"> Menor 18</label>
+            <label><input type="radio" name="age"> Entre 18 y 25</label>
+            <label><input type="radio" name="age"> Entre 26 y 50</label>
+            <label><input type="radio" name="age"> Mayor de 50</label>
+        </fieldset>
+        <fieldset>
+            <legend>Información Interés</legend>
+            <label><input type="checkbox" name="gusto"> Gusto</label>
+            <label><input type="checkbox" name="tacto"> Tacto</label>
+            <label><input type="checkbox" name="olfato"> Olfato</label>
+            <label><input type="checkbox" name="oido"> Oido</label>
+            <label><input type="checkbox" name="vista"> Vista</label>
+        </fieldset>
+        <label>Suscribirse <input type="checkbox" name="subcribe" checked="checked"></label>
+        <input type="submit" value="Enviar">
+        <input type="reset" value="Restablecer">
+    </form>
+    <a href="../../index.html">Página principal</a>
+</body>
+</html>
