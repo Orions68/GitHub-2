@@ -1,0 +1,43 @@
+caption
+{
+    border-right: 2px solid grey;
+    border-bottom: 2px solid gray;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.35em;
+}
+
+th
+{
+    border-right: 2px solid gray;
+    border-bottom: 2px solid gray;
+    width: 30px;
+    height: 30px;
+}
+
+td
+{
+    border-right: 2px solid gray;
+    border-bottom: 2px solid gray;
+    height: 30px;
+    text-align: center;
+}
+
+body
+{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #95E1FF;
+}
+
+.nov14
+{
+    background-color: #FFFFEE;
+    border: 1px solid black;
+    margin-left: 10px;
+}
+
+table
+{
+    margin: 20px;
+    empty-cells: hide;
+}
