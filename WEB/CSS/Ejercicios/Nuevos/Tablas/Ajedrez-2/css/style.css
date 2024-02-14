@@ -1,0 +1,38 @@
+table
+{
+    border: 1px solid;
+}
+
+
+td
+{
+    border: 1px solid;
+    width: 82px;
+    height: 64px;
+}
+ 
+.black
+{
+    background-color: black;
+}
+
+.black_peon
+{
+    background-repeat: no-repeat;
+    background-image: url("../Piezas/Peon-Negro.png");
+    background-position: center;
+}
+
+.white_peon
+{
+    background-repeat: no-repeat;
+    background-image: url("../Piezas/Peon-Blanco.png");
+    background-position: center;
+}
+
+.num
+{
+    width: 41px;
+    text-align: center;
+    font-weight: bold;
+}
