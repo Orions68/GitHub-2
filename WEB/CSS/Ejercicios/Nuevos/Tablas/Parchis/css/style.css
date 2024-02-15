@@ -11,20 +11,19 @@ td
     height: 48px;
 }
 
+.yellow
+{
+    background-color: yellow;
+}
+
 .yellow1
 {
     border: none;
     background-color: yellow;
 }
 
-.yellow
-{
-    background-color: yellow;
-}
-
 .green
 {
-    border-collapse: collapse;
     background-color: green;
 }
 
