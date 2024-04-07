@@ -15,7 +15,7 @@ include "includes/nav_index.html";
                     <fieldset>
                         <legend>Por Favor Ingresa la MAC Sospechosa</legend>
                         <form action="review.php" method="post">
-                        <label><input type="text" name="data"> MAC Address</label>
+                        <label><input type="text" name="data" required> MAC Address</label>
                         <br><br>
                         <input type="submit" value="Verifica">
                         </form>
