@@ -46,6 +46,11 @@ function intercalate($conn, $mac)
             if (!$ok)
             {
                 echo "<script>toast(2, 'CUIDADO:', 'La MAC Detectada no es Valida, puede tratarse de una MAC Virtual o Randomizada, Android, IOS o Virtual.');</script>";
+                date_default_timezone_set('Europe/London');
+                $date = date('Y/m/d H:i:s A', time());
+                $sql = "INSERT INTO intruder VALUES(:oui, :mac, :mark, :private, :type, :up_date, :date, :attacks);";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([':oui' => $oui, ':mac' => $mac, ':mark' => "Android, IOS, Virtual", ':private' => 1, ':type' => "MA_L", ':up_date' => "1970-01-01", ':date' => $date, ':attacks' => 1]);
             }
         }
     }
@@ -84,11 +89,6 @@ function search($conn, $oui, $mac)
     }
     else
     {
-        date_default_timezone_set('Europe/London');
-        $date = date('Y/m/d H:i:s A', time());
-        $sql = "INSERT INTO intruder VALUES(:oui, :mac, :mark, :private, :type, :up_date, :date, :attacks);";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([':oui' => $oui, ':mac' => $mac, ':mark' => "Android, IOS, Virtual", ':private' => 1, ':type' => "MA_L", ':up_date' => "1970-01-01", ':date' => $date, ':attacks' => 1]);
         return false;
     }
 }
