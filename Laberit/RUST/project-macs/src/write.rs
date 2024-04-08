@@ -3,10 +3,10 @@ async fn example() -> Result<(), Box<dyn std::error::Error>> {
     use influxdb2::models::DataPoint;
     use influxdb2::Client;
 
-    let host = std::env::var("InfluxDB").unwrap();
-    let org = std::env::var("InfluxOrg").unwrap();
-    let token = std::env::var("InfluxToken").unwrap();
-    let bucket = "MACS";
+    let host = std::env::var("INFLUX_HOST").unwrap();
+    let org = std::env::var("INFLUX_ORG").unwrap();
+    let token = std::env::var("INFLUX_TOKEN").unwrap();
+    let bucket = "MACDB";
     let client = Client::new(host, org, token);
      
     let points = vec![

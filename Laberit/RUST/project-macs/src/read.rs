@@ -20,12 +20,12 @@ impl Default for StockPrice {
 }
 
 async fn example() -> Result<(), Box<dyn std::error::Error>> {
-    let host = std::env::var("InfluxDB").unwrap();
-    let org = std::env::var("InfluxOrg").unwrap();
-    let token = std::env::var("InfluxToken").unwrap();
+    let host = std::env::var("INFLUX_HOST").unwrap();
+    let org = std::env::var("INFLUX_ORG").unwrap();
+    let token = std::env::var("INFLUX_TOKEN").unwrap();
     let client = Client::new(host, org, token);
 
-    let qs = format!("from(bucket: \"MACS\")
+    let qs = format!("from(bucket: \"MACDB\")
         |> range(start: -1w)
         |> filter(fn: (r) => r.ticker == \"{}\")
         |> last()
