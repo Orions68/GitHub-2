@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado del Comando NMAP</title>
+</head>
+<body>
+    <script>
+//  import { exec } from 'child_process';
+const { exec } = require('child_process');
+ 
+const ip = 'tu_direccion_ip_interna';
+ 
+exec(`nmap 192.168.83.1`, (error, stdout, stderr) => {
+  if (error) {
+    console.error(`Error al ejecutar el comando: ${error}`);
+    return;
+  }
+  console.log(`Output del comando nmap:\n${stdout}`);
+});
+    </script>
+</body>
+</html>

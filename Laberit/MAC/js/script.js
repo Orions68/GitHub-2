@@ -1,8 +1,68 @@
+function totNumPages() // Función para la paginación
+{
+    return Math.ceil(window.length / window.qtty); // Calcula la cantidad de páginas que habrá, divide la cantidad de datos por 5 resultados a mostrar por página.
+}
+
+function prev() // Función para ir a la página anterior.
+{
+    if (window.page > 1) // Si la página actual es mayor que la página 1.
+    {
+        window.page--; // Decrementa la variable page, página anterior.
+        change(window.page, window.qtty); // Llama a la función change pasandole el número de página a mostrar y la cantidad de datos a mostrar que siempre es 5.
+    }
+}
+
+function next() // La Función next muestra la página siguiente.
+{   
+    if (window.page < totNumPages()) // Si la página en la que estoy es menor que la última.
+    {
+        window.page++; // Incremento la página
+        change(window.page, window.qtty); // Llamo a la función que muestra los resultados.
+    }
+}
+
+function change(page, qtty) // Función que muestra los resultados de a 5 en la tabla, recibe la página page, la cantidad de resultados a mostrar qtty y true si viene de index y false si viene de profile.
+{
+    window.page = page; // Asigno la variable page, a la variable global window.page.
+    window.qtty = qtty; // Asigno la variable qtty, a la variable global window.qtty.
+    var length = oui.length; // Necesito el tamaño del array de servicios(Los Servicios en la Base de Datos).
+    window.length = length; // Hago global la variable length.
+
+    var html = "<table><tr><th>OUI</th><th>Dirección</th><th>Fabricante</th><th>Privada</th><th>Tipo</th><th>Actualizada</th><th>Ataques</th><th>Fecha</th></tr>";
+    for (i = (page - 1) * qtty; i < page * qtty; i++) // Aquí hago el bucle desde la página donde esté, a la cantidad de resultados a mostrar.
+    {
+        if (i < length) // Si i es menor que el tamaño del array.
+        {
+            html += "<tr><td>" + oui[i] + "</td><td>" + mac[i] + "</td><td>" + mark[i] + "</td><td>" + private[i] + "</td><td>" + type[i] + "</td><td>" + update[i] + "</td><td>" + attacks[i] + "</td><td>" + date[i] + "</td></tr>";
+        }
+    }
+    html += "</table>";
+    table.innerHTML = html; // Muestro todo en pantalla.
+
+    if (length > 5) // Si la cantidad de Artículos es mayor que 5.
+    {
+        pages.innerHTML = "Página: " + page; // Muestro el número de página.
+        if (page == 1) // Si la página es la número 1
+        {
+            prev_btn.style.visibility = "hidden"; // Escondo el Botón con id prev que mostraría los resultados anteriores.
+        }
+        else // Si no, estoy en otra página.
+        {
+            prev_btn.style.visibility = "visible"; // Hago visible el botón para mostrar los resultados anteriores.
+        }
+        if (page == totNumPages()) // Si estoy en la última página.
+        {
+            next_btn.style.visibility = "hidden"; // Escondo el botón para mostrar los resultados siguientes.
+        }
+        else // Si no, estoy en una página intermedia o en la primera.
+        {
+            next_btn.style.visibility = "visible"; // Hago visible el botón para mostrar los resultados siguientes.
+        }
+    }
+}
+
 function toast(warn, ttl, msg) // Función para mostrar el Dialogo con los mensajes de alerta, recibe, Código, Título y Mensaje.
 {
-    // var alerta = document.getElementById("alerta"); // La ID del botón del dialogo.
-    // var title = document.getElementById("title"); // Asigno a la variable title el h4 con id title.
-    // var message = document.getElementById("message"); // Asigno a la variable message el h5 con id message;
     if (warn == 1) // Si el código es 1, es una alerta.
     {
         title.style.backgroundColor = "#000000"; // Pongo los atributos, color de fondo negro.
@@ -25,10 +85,7 @@ function toast(warn, ttl, msg) // Función para mostrar el Dialogo con los mensa
 
 function screenSize() // Función para dar el tamaño máximo de la pantalla a las vistas.
 {
-    // let view1 = document.getElementById("view1"); // view1 es la ID del div view1.
-    // let view2 = document.getElementById("view2");
     let view3 = document.getElementById("view3");
-    // let view4 = document.getElementById("view4");
     let height = window.innerHeight; // window.innerHeight es el tamaño vertical de la pantalla.
 
     if (view1.offsetHeight < height) // Si el tamaño vertical de la vista es menor que el tamaño vertical de la pantalla.
@@ -62,9 +119,6 @@ function screenSize() // Función para dar el tamaño máximo de la pantalla a l
 
 function verify() // Función para validar las contraseñas de registro de alumnos y las de modificación.
 {
-    // var pass = document.getElementById("pass1"); // pass es la ID del input pass0.
-    // var pass2 = document.getElementById("pass2"); // pass2 es la ID del input pass1.
-
     if (pass1.value != pass2.value) // Verifico si los valores en los input pass y pass2 no coinciden.
     {
         toast(1, "Hay un Error", "Las contraseñas no coinciden, has escrito: " + pass1.value + " y " + pass2.value); // Si no coinciden muestro error.
@@ -104,12 +158,7 @@ function showImg(src) // Not in Use but a Good One
 
 function changeit() // Función para la página de contacto.
 {
-    // var button = document.getElementById("change"); // En la variable button obtengo la ID del input type submit change.
-    // var contact = document.getElementById("contact"); // En la variable contact obtengo el id del selector.
-    // var phone = document.getElementById("phone");
-    // var email = document.getElementById("email");
-    // var ph = document.getElementById("ph");
-    // var em = document.getElementById("em");
+    // var changes = document.getElementById("changes"); // En la variable button obtengo la ID del input type submit change.
 
     if (contact.value != "") // Si el valor en el selector ha cambiado.
     {
@@ -120,14 +169,14 @@ function changeit() // Función para la página de contacto.
                 phone.style.visibility = "visible";
                 em.required = false;
                 ph.required = true;
-                button.value = "Llamame!";
+                changes.value = "Llamame!";
                 break;
             case "Whatsapp":
                 email.style.visibility = "hidden";
                 phone.style.visibility = "visible";
                 em.required = false;
                 ph.required = true;
-                button.value = "Mandame un Guasap";
+                changes.value = "Mandame un Guasap";
                 break;
             default:
                 email.style.visibility = "visible";
@@ -135,7 +184,7 @@ function changeit() // Función para la página de contacto.
                 ph.required = false;
                 ph.value = 1;
                 em.required = true;
-                button.value = "Espero tu E-mail";
+                changes.value = "Espero tu E-mail";
                 break;
         }
     }
@@ -150,8 +199,6 @@ function connect(how)
 
 function screen() // Esta función comprueba si el ancho de la pantalla es de Ordenador o de Teléfono.
 {
-    // let mobile = document.getElementById("mobile");
-    // let pc = document.getElementById("pc");
     let width = innerWidth;
     if (width < 965) // Si el ancho es inferior a 965.
     {
@@ -208,7 +255,7 @@ function printIt(number)
 
 function capture(number)
 {
-    const print = document.getElementById("printable" + number); // Asigna a printi el Div con ID printable + number
+    const print = document.getElementById("printable" + number); // Asigna a print el Div con ID printable + number
     const image = document.getElementById("image" + number); // Asigna a image el Div con ID image + number, contendrá el elemento img con la factura.
 
     html2canvas(print).then((canvas) => {

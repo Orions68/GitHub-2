@@ -13,9 +13,11 @@ include "includes/nav_index.html";
                     <br><br><br><br>
                     <h1>Verificador de MACS</h1>
                     <fieldset>
-                        <legend>Por Favor Ingresa la MAC Sospechosa</legend>
+                        <legend>Por Favor Ingresa la MAC Sospechosa y la IP</legend>
                         <form action="review.php" method="post">
                         <label><input type="text" name="data" required> MAC Address</label>
+                        <br><br>
+                        <label><input type="text" name="ip" required> IP Address</label>
                         <br><br>
                         <input type="submit" value="Verifica">
                         </form>
@@ -24,39 +26,60 @@ include "includes/nav_index.html";
                 <div id="view2">
                     <br><br><br><br>
                     <?php
+                    $i = 0;
                     $sql = "SELECT * FROM intruder ORDER BY date DESC, attacks DESC;";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute();
                     if ($stmt->rowCount() > 0)
                     {
-                        echo "<table><tr><th>OUI</th><th>Dirección</th><th>Fabricante</th><th>Privada</th><th>Tipo</th><th>Actualizada</th><th>Ataques</th><th>Fecha</th></tr><tr>";
+                        $ok = true;
                         while ($row = $stmt->fetch(PDO::FETCH_OBJ))
                         {
-                            $date = date("Y-m-d", strtotime($row->date));
-                                echo "<td id='col' onclick='givemeData(\"$row->oui\")'>$row->oui</td>
-                                <td>$row->mac</td>
-                                <td>$row->mark</td>
-                                <td>$row->private</td>
-                                <td>$row->type</td>
-                                <td>$row->up_date</td>";
-                            if ($date == date("Y-m-d"))
-                            {
-                                echo "<td class='red'>$row->attacks</td>
-                                <td>$row->date</td></tr>";
-                            }
-                            else
-                            {
-                                echo "<td>$row->attacks</td>
-                                <td>$row->date</td></tr>";
-                            }
+                            $oui[$i] = $row->oui;
+                            $mac[$i] = $row->mac;
+                            $mark[$i] = $row->mark;
+                            $private[$i] = $row->private;
+                            $type[$i] = $row->type;
+                            $update[$i] = $row->up_date;
+                            $attacks[$i] = $row->attacks;
+                            $date[$i] = $row->date;
+                            $i++;
                         }
-                        echo "</table>";
                     }
                     else
                     {
-                        echo "<h1>Aun sin Datos.</h1>";
+                        echo "<script>toast(0, 'No se Ha Producido Ninguna Incidencia Aun:', 'Esperamos que Siga así por Mucho Tiempo<br>En Caso de Ataque, Verás Una Tabla con las Direcciones MAC y Datos de los Dispositivos que Itentan Vulnerar la Red.')</script>";
                     }
-                    ?>
+                    if ($ok)
+                    {
+                        echo "<script>var oui = [];
+                            var mac = [];
+                            var mark = [];
+                            var private = [];
+                            var type = [];
+                            var update = [];
+                            var attacks = [];
+                            var date = [];</script>";
+                        for ($i = 0; $i < count($oui); $i++)
+                        {
+                            echo "<script>oui[" . $i . "] = '" . $oui[$i] . "';
+                                mac[" . $i . "] = '" . $mac[$i] . "';
+                                mark[" . $i . "] = '" . $mark[$i] . "';
+                                private[" . $i . "] = '" . $private[$i] . "';
+                                type[" . $i . "] = '" . $type[$i] . "';
+                                update[" . $i . "] = '" . $update[$i] . "';
+                                attacks[" . $i . "] = '" . $attacks[$i] . "';
+                                date[" . $i . "] = '" . $date[$i] . "';</script>";
+                        }
+                    }
+                ?>
+                <div id="table"></div>
+                <br>
+                <span id="pages"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button onclick="prev()" id="prev_btn" class="btn btn-danger" style="visibility: hidden;">Anteriores Resultados</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button onclick="next()" id="next_btn" class="btn btn-primary" style="visibility: hidden;">Siguientes Resultados</button><br>
+                <script>change(1, 8);</script>
+                <br><br><br><br>
                 </div>
             </div>
         <div class="col-md-1"></div>

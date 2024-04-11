@@ -1,0 +1,2 @@
+
+C:\Server\htdocs\GitHub\Laberit\MAC>nmap.exe 192.168.83.1 

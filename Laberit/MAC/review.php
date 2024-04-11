@@ -7,10 +7,11 @@ include "includes/modal_index.html";
 if (isset($_POST["data"]))
 {
     $data = $_POST["data"];
+    $ip = $_POST["ip"];
     $mac = explode("; ", $data);
     if (strpos($mac[0], ":") == 2)
     {
-        intercalate($conn, $mac[0]);
+        intercalate($conn, $mac[0], $ip);
     }
     else
     {
@@ -27,36 +28,36 @@ if (isset($_POST["data"]))
                 $mac[0] = substr_replace($mac[0], ":", $i, 0);
             }
         }
-        intercalate($conn, $mac[0]);
+        intercalate($conn, $mac[0], $ip);
     }
 }
 
-function intercalate($conn, $mac)
+function intercalate($conn, $mac, $ip)
 {
     $ma_s = substr($mac, 0, 13);
     $ma_m = substr($mac, 0, 10);
     $ma_l = substr($mac, 0, 8);
-    $ok = search($conn, $ma_s, $mac);
+    $ok = search($conn, $ma_s, $mac, $ip);
     if (!$ok)
     {
-        $ok = search($conn, $ma_m, $mac);
+        $ok = search($conn, $ma_m, $mac, $ip);
         if (!$ok)
         {
-            $ok = search($conn, $ma_l, $mac);
+            $ok = search($conn, $ma_l, $mac, $ip);
             if (!$ok)
             {
                 echo "<script>toast(2, 'CUIDADO:', 'La MAC Detectada no es Valida, puede tratarse de una MAC Virtual o Randomizada, Android, IOS o Virtual.');</script>";
                 date_default_timezone_set('Europe/London');
                 $date = date('Y/m/d H:i:s A', time());
-                $sql = "INSERT INTO intruder VALUES(:oui, :mac, :mark, :private, :type, :up_date, :date, :attacks);";
+                $sql = "INSERT INTO intruder VALUES(:oui, :mac, :ip, :mark, :private, :type, :up_date, :date, :attacks);";
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([':oui' => $oui, ':mac' => $mac, ':mark' => "Android, IOS, Virtual", ':private' => 1, ':type' => "MA_L", ':up_date' => "1970-01-01", ':date' => $date, ':attacks' => 1]);
+                $stmt->execute([':oui' => $ma_l, ':mac' => $mac, ':ip' => $ip, ':mark' => "Android, IOS, Virtual", ':private' => 1, ':type' => "MA_L", ':up_date' => "1970-01-01", ':date' => $date, ':attacks' => 1]);
             }
         }
     }
 }
 
-function search($conn, $oui, $mac)
+function search($conn, $oui, $mac, $ip)
 {
     $sql = "SELECT * FROM mac WHERE macPrefix='$oui'";
     $stmt = $conn->prepare($sql);
@@ -65,7 +66,7 @@ function search($conn, $oui, $mac)
     {
         $row = $stmt->fetch(PDO::FETCH_OBJ);
         $oui = $row->macPrefix;
-        $sql = "SELECT oui FROM intruder WHERE oui='$oui';";
+        $sql = "SELECT oui FROM intruder WHERE oui='$oui' AND ip='$ip';";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         if ($stmt->rowCount() > 0)
@@ -81,9 +82,9 @@ function search($conn, $oui, $mac)
             echo "<script>toast(0, 'Resultado:', 'Se ha Encontrado la MAC en la Base de Datos.<br>Estos son los datos de la MAC:<br>$result<br><br>Se Han Agregado los Datos a la Base de Datos.');</script>";
             date_default_timezone_set('Europe/London');
             $date = date('Y/m/d H:i:s A', time());
-            $sql = "INSERT INTO intruder VALUES(:oui, :mac, :mark, :private, :type, :up_date, :date, :attacks);";
+            $sql = "INSERT INTO intruder VALUES(:oui, :mac, :ip, :mark, :private, :type, :up_date, :date, :attacks);";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([':oui' => $row->macPrefix, ':mac' => $mac, ':mark' => $row->vendorName, ':private' => $row->private, ':type' => $row->blockType, ':up_date' => $row->lastUpdate, ':date' => $date, ':attacks' => 1]);
+            $stmt->execute([':oui' => $row->macPrefix, ':mac' => $mac, ':ip' => $ip, ':mark' => $row->vendorName, ':private' => $row->private, ':type' => $row->blockType, ':up_date' => $row->lastUpdate, ':date' => $date, ':attacks' => 1]);
         }
         return true;
     }
