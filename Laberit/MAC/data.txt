@@ -1,0 +1,25 @@
+Open 192.168.83.1:4500
+[1;34m[~][0m Starting Script(s)
+[1;34m[~][0m Starting Nmap 7.94 ( https://nmap.org ) at 2024-04-12 10:14 Hora de verano GMT
+Initiating ARP Ping Scan at 10:14
+Scanning 192.168.83.1 [1 port]
+Completed ARP Ping Scan at 10:14, 0.10s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 10:14
+Completed Parallel DNS resolution of 1 host. at 10:14, 0.11s elapsed
+DNS resolution of 1 IPs took 0.15s. Mode: Async [#: 4, OK: 0, NX: 1, DR: 0, SF: 0, TR: 1, CN: 0]
+Initiating SYN Stealth Scan at 10:14
+Scanning 192.168.83.1 [1 port]
+Discovered open port 4500/tcp on 192.168.83.1
+Completed SYN Stealth Scan at 10:14, 0.00s elapsed (1 total ports)
+Nmap scan report for 192.168.83.1
+Host is up, received arp-response (0.0011s latency).
+Scanned at 2024-04-12 10:14:20 Hora de verano GMT for 0s
+
+PORT     STATE SERVICE REASON
+4500/tcp open  sae-urn syn-ack ttl 64
+MAC Address: 04:D5:90:FF:4B:0B (Fortinet)
+
+Read data files from: C:\Server\htdocs\GitHub\Laberit\MAC
+Nmap done: 1 IP address (1 host up) scanned in 0.68 seconds
+           Raw packets sent: 2 (72B) | Rcvd: 2 (72B)
+

@@ -4,6 +4,53 @@ $title = "Detección de Intrusión";
 include "includes/header.php";
 include "includes/modal_index.html";
 
+if (isset($_POST["ip"]))
+{
+    // $ip = $_POST['ip'];
+    // exec('rustscan -a ' . $ip . ' > data.txt', $result);
+
+    $filename = "data.txt";
+    $file = fopen($filename, "r");
+    if ($file)
+    {
+        $counter = 0;
+        while (!feof($file))
+        {
+            $string = fgets($file);
+            if (str_starts_with($string, "Open"))
+            {
+                $contents[$counter] = $string;
+                $counter++;
+            }
+            else
+            {
+                if (str_starts_with($string, "MAC Address:"))
+                {
+                    $contents[$counter] = $string;
+                    $counter++;
+                }
+            }
+        }   
+        fclose($file);
+
+        for ($i = 0; $i < count($contents); $i++)
+        {
+            echo $contents[$i] . "<br>";
+            $result[$i] = explode(" ", $contents[$i]);
+        }
+
+        for ($i = 0; $i < count($result[0]); $i++)
+        {
+            echo $result[0][$i] . "<br>";
+        }
+
+        for ($i = 0; $i < count($result[1]); $i++)
+        {
+            echo $result[1][$i] . "<br>";
+        }
+    }
+}
+
 if (isset($_POST["data"]))
 {
     $data = $_POST["data"];
