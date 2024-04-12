@@ -4,36 +4,35 @@ $title = "Detección de Intrusión";
 include "includes/header.php";
 include "includes/modal_index.html";
 
-if (isset($_POST["ip"]))
+if (isset($_POST["ip"])) // Recibe la IP desde el script index.php por POST.
 {
-    $ip = $_POST['ip'];
-    exec('rustscan -a ' . $ip . ' > data.txt', $result);
+    $ip = $_POST['ip']; // Se la Asigna a $Iip.
+    exec('rustscan -a ' . $ip . ' > data.txt', $result); // Ejecuta la aplicación rustscan pasandole la IP con el modificador -a y redirecciona la salida al fichero data.txt.
 
-    $filename = "data.txt";
-    $file = fopen($filename, "r");
-    if ($file)
+    $filename = "data.txt"; // Asigna a $filename el valor data.txt, el nombre del fichero con los datos.
+    $file = fopen($filename, "r"); // Abre pata lectura el fichero data.txt.
+    if ($file) // Si se leyo.
     {
-        $mac_ok = true;
-        $port_index = 0;
-        $mac_index = 0;
-        while (!feof($file))
+        $mac_ok = true; // Pogno el Boleano $mac_ok a true.
+        $port_index = 0; // Índice para los Puertos.
+        while (!feof($file)) // Mientras lea del fichero.
         {
-            $string = fgets($file);
-            if (str_starts_with($string, "Open"))
+            $string = fgets($file); // Asigna a $string la línea de texto leida desde el fichero.
+            if (str_starts_with($string, "Open")) // Si la Línea contiene la palabra Open.
             {
-                $ports[$port_index] = $string;
-                $port_index++;
+                $ports[$port_index] = $string; // Asigna el contenido de la línea al rray de puertos $ports[$port_index], por si hay más de un puerto abierto.
+                $port_index++; // incrementa el Índice para los puertos.
             }
-            else
+            else // Si no encuentra la palabra Open.
             {
-                if (str_starts_with($string, "MAC Address:"))
+                if (str_starts_with($string, "MAC Address:")) // Si la string contiene la frase MAC Address:
                 {
-                    $macs[$mac_index] = $string;
-                    $mac_index++;
+                    $mac = $string;
                 }
                 else
                 {
                     $string = "La IP está Asignada a una MAC Virtual o Randomizada<br>Por Favor Escribe la MAC en el Formulario y Haz Click en el Botón Almacena la MAC.";
+                    $mac_result[2] = "";
                     $mac_ok = false;
                 }
             }
@@ -53,15 +52,12 @@ if (isset($_POST["ip"]))
                 echo $port_result[$i] . "<br>";
             }
 
-            for ($i = 0; $i < count($macs); $i++)
-            {
-                echo $macs[$i] . "<br>";
-                $mac_result = explode(" ", $macs[$i]);
-            }
+            echo $mac . "<br>";
+            $mac_result = explode(" ", $mac);
 
             for ($i = 0; $i < count($mac_result); $i++)
             {
-                echo $port_result[$i] . "<br>";
+                echo $mac_result[$i] . "<br>";
             }
         }
 
