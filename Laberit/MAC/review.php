@@ -13,7 +13,7 @@ if (isset($_POST["ip"])) // Recibe la IP desde el script index.php por POST.
     $file = fopen($filename, "r"); // Abre pata lectura el fichero data.txt.
     if ($file) // Si se leyo.
     {
-        $mac_ok = true; // Pogno el Boleano $mac_ok a true.
+        $mac = "";
         $port_index = 0; // Índice para los Puertos.
         while (!feof($file)) // Mientras lea del fichero.
         {
@@ -23,23 +23,14 @@ if (isset($_POST["ip"])) // Recibe la IP desde el script index.php por POST.
                 $ports[$port_index] = $string; // Asigna el contenido de la línea al rray de puertos $ports[$port_index], por si hay más de un puerto abierto.
                 $port_index++; // incrementa el Índice para los puertos.
             }
-            else // Si no encuentra la palabra Open.
+            else if (str_starts_with($string, "MAC Address:")) // Si la string contiene la frase MAC Address:
             {
-                if (str_starts_with($string, "MAC Address:")) // Si la string contiene la frase MAC Address:
-                {
-                    $mac = $string;
-                }
-                else
-                {
-                    $string = "La IP está Asignada a una MAC Virtual o Randomizada<br>Por Favor Escribe la MAC en el Formulario y Haz Click en el Botón Almacena la MAC.";
-                    $mac_result[2] = "";
-                    $mac_ok = false;
-                }
+                $mac = $string;
             }
         }   
         fclose($file);
 
-        if ($mac_ok)
+        if ($mac != "")
         {
             for ($i = 0; $i < count($ports); $i++)
             {
@@ -66,7 +57,9 @@ if (isset($_POST["ip"])) // Recibe la IP desde el script index.php por POST.
                 <form action="review.php" method="post">
                 <label><input type="text" name="data" value="' . $mac_result[2] . '" required> MAC Address</label>
                 <br><br>
-                        <input type="submit" value="Verifica">
+                <input type="hidden" name="ip2" value="' . $ip . '">
+                <br><br>
+                        <input type="submit" value="Alamcena la MAC">
                         </form>
                     </fieldset>';
     }
@@ -75,7 +68,7 @@ if (isset($_POST["ip"])) // Recibe la IP desde el script index.php por POST.
 if (isset($_POST["data"]))
 {
     $data = $_POST["data"];
-    $ip = $_POST["ip"];
+    $ip = $_POST["ip2"];
     $mac = explode("; ", $data);
     if (strpos($mac[0], ":") == 2)
     {
@@ -153,8 +146,8 @@ function search($conn, $oui, $mac, $ip)
             $sql = "INSERT INTO intruder VALUES(:oui, :mac, :ip, :mark, :private, :type, :up_date, :date, :attacks);";
             $stmt = $conn->prepare($sql);
             $stmt->execute([':oui' => $row->macPrefix, ':mac' => $mac, ':ip' => $ip, ':mark' => $row->vendorName, ':private' => $row->private, ':type' => $row->blockType, ':up_date' => $row->lastUpdate, ':date' => $date, ':attacks' => 1]);
+            return true;
         }
-        return true;
     }
     else
     {
