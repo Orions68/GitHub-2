@@ -6,48 +6,73 @@ include "includes/modal_index.html";
 
 if (isset($_POST["ip"]))
 {
-    // $ip = $_POST['ip'];
-    // exec('rustscan -a ' . $ip . ' > data.txt', $result);
+    $ip = $_POST['ip'];
+    exec('rustscan -a ' . $ip . ' > data.txt', $result);
 
     $filename = "data.txt";
     $file = fopen($filename, "r");
     if ($file)
     {
-        $counter = 0;
+        $mac_ok = true;
+        $port_index = 0;
+        $mac_index = 0;
         while (!feof($file))
         {
             $string = fgets($file);
             if (str_starts_with($string, "Open"))
             {
-                $contents[$counter] = $string;
-                $counter++;
+                $ports[$port_index] = $string;
+                $port_index++;
             }
             else
             {
                 if (str_starts_with($string, "MAC Address:"))
                 {
-                    $contents[$counter] = $string;
-                    $counter++;
+                    $macs[$mac_index] = $string;
+                    $mac_index++;
+                }
+                else
+                {
+                    $string = "La IP está Asignada a una MAC Virtual o Randomizada<br>Por Favor Escribe la MAC en el Formulario y Haz Click en el Botón Almacena la MAC.";
+                    $mac_ok = false;
                 }
             }
         }   
         fclose($file);
 
-        for ($i = 0; $i < count($contents); $i++)
+        if ($mac_ok)
         {
-            echo $contents[$i] . "<br>";
-            $result[$i] = explode(" ", $contents[$i]);
+            for ($i = 0; $i < count($ports); $i++)
+            {
+                echo $ports[$i] . "<br>";
+                $port_result = explode(" ", $ports[$i]);
+            }
+
+            for ($i = 0; $i < count($port_result); $i++)
+            {
+                echo $port_result[$i] . "<br>";
+            }
+
+            for ($i = 0; $i < count($macs); $i++)
+            {
+                echo $macs[$i] . "<br>";
+                $mac_result = explode(" ", $macs[$i]);
+            }
+
+            for ($i = 0; $i < count($mac_result); $i++)
+            {
+                echo $port_result[$i] . "<br>";
+            }
         }
 
-        for ($i = 0; $i < count($result[0]); $i++)
-        {
-            echo $result[0][$i] . "<br>";
-        }
-
-        for ($i = 0; $i < count($result[1]); $i++)
-        {
-            echo $result[1][$i] . "<br>";
-        }
+        echo '<fieldset>
+                <legend>Por Favor Ingresa la MAC Sospechosa</legend>
+                <form action="review.php" method="post">
+                <label><input type="text" name="data" value="' . $mac_result[2] . '" required> MAC Address</label>
+                <br><br>
+                        <input type="submit" value="Verifica">
+                        </form>
+                    </fieldset>';
     }
 }
 

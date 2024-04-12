@@ -61,6 +61,11 @@ function change(page, qtty) // Función que muestra los resultados de a 5 en la 
     }
 }
 
+function wait()
+{
+    alert ("Espera unos Segundos Hasta que se Verifique la IP.<br>Se Cargará una Nueva Página.");
+}
+
 function toast(warn, ttl, msg) // Función para mostrar el Dialogo con los mensajes de alerta, recibe, Código, Título y Mensaje.
 {
     if (warn == 1) // Si el código es 1, es una alerta.

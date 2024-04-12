@@ -13,13 +13,11 @@ include "includes/nav_index.html";
                     <br><br><br><br>
                     <h1>Verificador de MACS</h1>
                     <fieldset>
-                        <legend>Por Favor Ingresa la MAC Sospechosa y la IP</legend>
+                        <legend>Por Favor Ingresa la IP</legend>
                         <form action="review.php" method="post">
-                        <!-- <label><input type="text" name="data" required> MAC Address</label>
-                        <br><br> -->
                         <label><input type="text" name="ip" required> IP Address</label>
                         <br><br>
-                        <input type="submit" value="Verifica">
+                        <input type="submit" onclick="wait()" value="Verifica">
                         </form>
                     </fieldset>
                 </div>
