@@ -129,13 +129,15 @@ function search($conn, $oui, $mac, $ip, $device, $port) // Función para comprob
     {
         $port = null; // Se pone la variable $port a null.
     }
-    $sql = "SELECT * FROM mac WHERE macPrefix='$oui'"; // Se obtienen todos los datos de las OUI (Organizationally Unique Identifier) que coicidan con la OUI pasada como parámetro.
+    // $sql = "SELECT * FROM mac WHERE macPrefix='$oui'"; // Se obtienen todos los datos de las OUI (Organizationally Unique Identifier) que coicidan con la OUI pasada como parámetro.
+    $sql = "CALL SP_Get_All('$oui')"; // Reemplazo el Query SQL por un Storage Procedure.
     $stmt = $conn->prepare($sql); // Se prepara la Consulta.
     $stmt->execute(); // Se Ejecuta.
     if ($stmt->rowCount() > 0) // Si se Obtienen Resultados.
     {
         $row = $stmt->fetch(PDO::FETCH_OBJ); // Se asigna la tupla a la variable $row.
-        $sql = "SELECT oui FROM intruder WHERE mac='$mac' AND ip='$ip';"; // Sentencia SQL para Verificar si la MAC y la IP del dispositivo ya habían intentado un ataque.
+        // $sql = "SELECT oui FROM intruder WHERE mac='$mac' AND ip='$ip';"; // Sentencia SQL para Verificar si la MAC y la IP del dispositivo ya habían intentado un ataque.
+        $sql = "CALL SP_Reincident('$mac', '$ip')"; // Reemplazo el Query SQL por un Storage Procedure.
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         if ($stmt->rowCount() > 0) // Si ya había un ataque de esa MAC con esa IP.
@@ -147,14 +149,17 @@ function search($conn, $oui, $mac, $ip, $device, $port) // Función para comprob
         }
         else // Si no hay coicidencia.
         {
-            $sql = "SELECT oui FROM intruder WHERE ip='$ip';"; // Se verifica si la IP ya está en la Base de Datos de Ataques.
+            // $sql = "SELECT oui FROM intruder WHERE ip='$ip';"; // Se verifica si la IP ya está en la Base de Datos de Ataques.
+            $sql = "CALL SP_Same_IP('$ip')"; // Reemplazo el Query SQL por un Storage Procedure.
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             if ($stmt->rowCount() > 0) // Si hay resultados.
             {
-                $sql = "INSERT INTO intruder VALUES(:oui, :mac, :ip, :mark, :device, :open_ports, :private, :type, :up_date, :date, :attacks);"; // Se inserta como un nuevo dispositivo.
+                // $sql = "INSERT INTO intruder VALUES(:oui, :mac, :ip, :mark, :device, :open_ports, :private, :type, :up_date, :date, :attacks);"; // Se inserta como un nuevo dispositivo.
+                $sql = "CALL SP_Insert_All('$row->macPrefix', '$mac', '$ip', '$row->vedorName', '$device', '$port', '$row->private', '$row->blockType', '$row->lastUpdate', '$date', 1)";
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([':oui' => $row->macPrefix, ':mac' => $mac, ':ip' => $ip, ':mark' => $row->vendorName, ':device' => $device, ':open_ports' => $port, ':private' => $row->private, ':type' => $row->blockType, ':up_date' => $row->lastUpdate, ':date' => $date, ':attacks' => 1]);
+                // $stmt->execute([':oui' => $row->macPrefix, ':mac' => $mac, ':ip' => $ip, ':mark' => $row->vendorName, ':device' => $device, ':open_ports' => $port, ':private' => $row->private, ':type' => $row->blockType, ':up_date' => $row->lastUpdate, ':date' => $date, ':attacks' => 1]);
+                $stmt->execute();
                 echo "<script>toast(1, 'ALERTA:', 'Se Ha Detectado un Ataque de una IP ya Registrada pero asignada a otra MAC.<br>Tomen las Precauciones Necesarias.');</script>"; // Se avisa que el ataque se produjo de una IP que ya estaba registrada.
             }
             else // Si No.
