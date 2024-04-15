@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-04-2024 a las 00:32:49
--- Versión del servidor: 10.11.6-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 15-04-2024 a las 14:51:35
+-- Versión del servidor: 10.4.25-MariaDB
+-- Versión de PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -23,6 +23,28 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `macs` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `macs`;
 
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_Get_All` (IN `oui` VARCHAR(13))   BEGIN
+SELECT * FROM mac WHERE macPrefix=oui;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_Insert_All` (IN `in_out` VARCHAR(13), IN `in_mac` VARCHAR(17), IN `in_ip` VARCHAR(15), IN `in_mark` VARCHAR(128), IN `in_device` VARCHAR(64), IN `in_open_ports` VARCHAR(4096), IN `in_private` BOOLEAN, IN `in_type` VARCHAR(4), IN `in_up_date` DATE, IN `in_date` DATETIME, IN `in_attacks` INT(11))   BEGIN
+INSERT INTO intruder VALUES(in_oui, in_mac, in_ip, in_mark, in_device, in_open_ports, in_private, in_type, in_up_date, in_date, in_attacks);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_Reincident` (IN `in_mac` VARCHAR(17), IN `in_ip` VARCHAR(15))   BEGIN
+SELECT oui FROM intruder WHERE mac=in_mac AND ip=in_ip;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_Same_IP` (IN `in_ip` VARCHAR(15))   BEGIN
+SELECT oui FROM intruder WHERE ip=in_ip;
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -30,18 +52,27 @@ USE `macs`;
 --
 
 CREATE TABLE `intruder` (
-  `oui` varchar(13) NOT NULL,
-  `mac` varchar(17) NOT NULL,
-  `ip` varchar(15) NOT NULL,
-  `mark` varchar(128) NOT NULL,
-  `device` varchar(64) NOT NULL,
-  `open_ports` varchar(4096) DEFAULT NULL,
+  `oui` varchar(13) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mac` varchar(17) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mark` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `device` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `open_ports` varchar(4096) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `private` tinyint(1) NOT NULL,
-  `type` varchar(4) NOT NULL,
+  `type` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
   `up_date` date DEFAULT NULL,
   `date` datetime NOT NULL,
   `attacks` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `intruder`
+--
+
+INSERT INTO `intruder` (`oui`, `mac`, `ip`, `mark`, `device`, `open_ports`, `private`, `type`, `up_date`, `date`, `attacks`) VALUES
+('04:D4:C4', '04:D4:C4:32:54:E1', '192.168.83.25', 'ASUSTek COMPUTER INC.', '192.168.83.25', '135/tcp open  msrpc139/tcp open  netbios-ssn445/tcp open  microsoft-ds', 0, 'MA-L', '2018-12-16', '2024-04-15 13:24:25', 2),
+('04:D5:90', '04:D5:90:FF:4B:0B', '192.168.83.1', 'Fortinet, Inc.', '192.168.83.1', '113/tcp closed ident', 0, 'MA-L', '2023-10-19', '2024-04-15 09:55:42', 1),
+('1A:0E:F2', '1A:0E:F2:AC:39:D6', '192.168.83.20', 'Android, IOS, Virtual', '192.168.83.20', '', 1, 'MA_L', '1970-01-01', '2024-04-15 08:53:06', 1);
 
 -- --------------------------------------------------------
 
@@ -50,10 +81,10 @@ CREATE TABLE `intruder` (
 --
 
 CREATE TABLE `mac` (
-  `macPrefix` varchar(14) NOT NULL,
-  `vendorName` varchar(128) NOT NULL,
+  `macPrefix` varchar(14) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vendorName` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `private` tinyint(1) NOT NULL,
-  `blockType` varchar(4) NOT NULL,
+  `blockType` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lastUpdate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
