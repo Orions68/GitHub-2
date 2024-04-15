@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-04-2024 a las 21:33:01
--- Versión del servidor: 10.4.25-MariaDB
--- Versión de PHP: 8.1.10
+-- Tiempo de generación: 15-04-2024 a las 00:32:49
+-- Versión del servidor: 10.11.6-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,32 +30,18 @@ USE `macs`;
 --
 
 CREATE TABLE `intruder` (
-  `oui` varchar(13) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mac` varchar(17) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mark` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `oui` varchar(13) NOT NULL,
+  `mac` varchar(17) NOT NULL,
+  `ip` varchar(15) NOT NULL,
+  `mark` varchar(128) NOT NULL,
+  `device` varchar(64) NOT NULL,
+  `open_ports` varchar(4096) DEFAULT NULL,
   `private` tinyint(1) NOT NULL,
-  `type` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(4) NOT NULL,
   `up_date` date DEFAULT NULL,
   `date` datetime NOT NULL,
   `attacks` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `intruder`
---
-
-INSERT INTO `intruder` (`oui`, `mac`, `mark`, `private`, `type`, `up_date`, `date`, `attacks`) VALUES
-('00:00:00', '00:00:00:11:11:11', 'XEROX CORPORATION', 0, 'MA-L', '2015-11-17', '2024-04-05 13:48:03', 1),
-('00:0C:29', '00:0c:29:8b:48:e5', 'VMware, Inc.', 0, 'MA-L', '2015-11-17', '2024-04-04 11:35:02', 1),
-('20:13:E0', '20:13:E0:5D:82:4E', 'Samsung Electronics Co.,Ltd', 0, 'MA-L', '2015-11-17', '2024-04-04 12:56:56', 1),
-('2C:54:91', '2C:54:91:88:C9:E3', 'Microsoft Corporation', 0, 'MA-L', '2017-08-11', '2024-04-05 09:36:14', 1),
-('70:F1:A1', '70:F1:A1:CC:BD:2F', 'Liteon Technology Corporation', 0, 'MA-L', '2015-11-17', '2024-04-04 12:58:14', 1),
-('8C:1F:64:FF:3', '8C:1F:64:FF:35:A2', 'Fuzhou Tucsen Photonics Co.,Ltd', 0, 'MA-S', '2023-07-10', '2024-04-05 08:31:32', 4),
-('94:45:60', '94:45:60:ad:ce:31', 'Google, Inc.', 0, 'MA-L', '2023-07-08', '2024-04-05 08:43:58', 2),
-('9C:AD:97', '9C:AD:97:AE:FD:43', 'Hon Hai Precision Ind. Co.,Ltd.', 0, 'MA-L', '2015-11-17', '2024-04-03 10:11:50', 2),
-('B8:4C:87:4', 'B8:4C:87:40:34:AB', 'Blum Novotest GmbH', 0, 'MA-M', '2023-07-10', '2024-04-03 10:05:05', 1),
-('EC:B1:D7', 'ec:b1:d7:6b:e9:ce', 'Hewlett Packard', 0, 'MA-L', '2015-11-17', '2024-04-04 08:12:11', 1),
-('F8:A9:63', 'F8:A9:63:A5:E6:AE', 'COMPAL INFORMATION (KUNSHAN) CO., LTD.', 0, 'MA-L', '2015-11-17', '2024-04-04 13:46:56', 2);
 
 -- --------------------------------------------------------
 
@@ -64,10 +50,10 @@ INSERT INTO `intruder` (`oui`, `mac`, `mark`, `private`, `type`, `up_date`, `dat
 --
 
 CREATE TABLE `mac` (
-  `macPrefix` varchar(14) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `vendorName` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `macPrefix` varchar(14) NOT NULL,
+  `vendorName` varchar(128) NOT NULL,
   `private` tinyint(1) NOT NULL,
-  `blockType` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `blockType` varchar(4) NOT NULL,
   `lastUpdate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -51432,7 +51418,7 @@ INSERT INTO `mac` (`macPrefix`, `vendorName`, `private`, `blockType`, `lastUpdat
 -- Indices de la tabla `intruder`
 --
 ALTER TABLE `intruder`
-  ADD PRIMARY KEY (`oui`);
+  ADD PRIMARY KEY (`mac`,`ip`);
 
 --
 -- Indices de la tabla `mac`

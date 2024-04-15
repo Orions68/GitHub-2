@@ -1,28 +1,9 @@
-Open 192.168.83.21:139
-Open 192.168.83.21:445
-[1;34m[~][0m Starting Script(s)
-[1;34m[~][0m Starting Nmap 7.94 ( https://nmap.org ) at 2024-04-12 13:17 Hora de verano GMT
-Initiating ARP Ping Scan at 13:17
-Scanning 192.168.83.21 [1 port]
-Completed ARP Ping Scan at 13:17, 0.12s elapsed (1 total hosts)
-Initiating Parallel DNS resolution of 1 host. at 13:17
-Completed Parallel DNS resolution of 1 host. at 13:17, 0.03s elapsed
-DNS resolution of 1 IPs took 0.08s. Mode: Async [#: 2, OK: 0, NX: 1, DR: 0, SF: 0, TR: 1, CN: 0]
-Initiating SYN Stealth Scan at 13:17
-Scanning 192.168.83.21 [2 ports]
-Discovered open port 445/tcp on 192.168.83.21
-Discovered open port 139/tcp on 192.168.83.21
-Completed SYN Stealth Scan at 13:17, 0.00s elapsed (2 total ports)
-Nmap scan report for 192.168.83.21
-Host is up, received arp-response (0.0011s latency).
-Scanned at 2024-04-12 13:17:38 Hora de verano GMT for 0s
+Starting Nmap 7.94 ( https://nmap.org ) at 2024-04-15 09:54 Hora de verano GMT
+Nmap scan report for 192.168.83.1
+Host is up (0.0028s latency).
+Not shown: 999 filtered tcp ports (no-response)
+PORT    STATE  SERVICE
+113/tcp closed ident
+MAC Address: 04:D5:90:FF:4B:0B (Fortinet)
 
-PORT    STATE SERVICE      REASON
-139/tcp open  netbios-ssn  syn-ack ttl 64
-445/tcp open  microsoft-ds syn-ack ttl 64
-MAC Address: 00:0C:29:FC:7E:EB (VMware)
-
-Read data files from: C:\Server\htdocs\GitHub\Laberit\MAC
-Nmap done: 1 IP address (1 host up) scanned in 0.63 seconds
-           Raw packets sent: 3 (116B) | Rcvd: 4 (160B)
-
+Nmap done: 1 IP address (1 host up) scanned in 5.08 seconds
