@@ -156,20 +156,23 @@ function search($conn, $oui, $mac, $ip, $device, $port) // Función para comprob
             if ($stmt->rowCount() > 0) // Si hay resultados.
             {
                 // $sql = "INSERT INTO intruder VALUES(:oui, :mac, :ip, :mark, :device, :open_ports, :private, :type, :up_date, :date, :attacks);"; // Se inserta como un nuevo dispositivo.
-                $sql = "CALL SP_Insert_All('$row->macPrefix', '$mac', '$ip', '$row->vedorName', '$device', '$port', '$row->private', '$row->blockType', '$row->lastUpdate', '$date', 1)";
-                $stmt = $conn->prepare($sql);
-                // $stmt->execute([':oui' => $row->macPrefix, ':mac' => $mac, ':ip' => $ip, ':mark' => $row->vendorName, ':device' => $device, ':open_ports' => $port, ':private' => $row->private, ':type' => $row->blockType, ':up_date' => $row->lastUpdate, ':date' => $date, ':attacks' => 1]);
-                $stmt->execute();
+                // $sql = "CALL SP_Insert_All('$row->macPrefix', '$mac', '$ip', '$row->vedorName', '$device', '$port', '$row->private', '$row->blockType', '$row->lastUpdate', '$date', 1)";
+                // $stmt = $conn->prepare($sql);
+                // // $stmt->execute([':oui' => $row->macPrefix, ':mac' => $mac, ':ip' => $ip, ':mark' => $row->vendorName, ':device' => $device, ':open_ports' => $port, ':private' => $row->private, ':type' => $row->blockType, ':up_date' => $row->lastUpdate, ':date' => $date, ':attacks' => 1]);
+                // $stmt->execute();
                 echo "<script>toast(1, 'ALERTA:', 'Se Ha Detectado un Ataque de una IP ya Registrada pero asignada a otra MAC.<br>Tomen las Precauciones Necesarias.');</script>"; // Se avisa que el ataque se produjo de una IP que ya estaba registrada.
             }
             else // Si No.
             {
                 $result = $row->macPrefix . " - " . $row->vendorName . " - " . $row->private . " - " . $row->blockType . " - " . $row->lastUpdate;
                 echo "<script>toast(0, 'Resultado:', 'Se ha Encontrado la MAC en la Base de Datos.<br>Estos son los datos de la MAC:<br>$result<br><br>Se Han Agregado los Datos a la Base de Datos.');</script>"; // Se Muestra que la MAC está en la Base de Datos de Fabricantes conocidos y se agregan todos los datos.
-                $sql = "INSERT INTO intruder VALUES(:oui, :mac, :ip, :mark, :device, :open_ports, :private, :type, :up_date, :date, :attacks);";
-                $stmt = $conn->prepare($sql);
-                $stmt->execute([':oui' => $row->macPrefix, ':mac' => $mac, ':ip' => $ip, ':mark' => $row->vendorName, ':device' => $device, ':open_ports' => $port, ':private' => $row->private, ':type' => $row->blockType, ':up_date' => $row->lastUpdate, ':date' => $date, ':attacks' => 1]);
+                // $sql = "INSERT INTO intruder VALUES(:oui, :mac, :ip, :mark, :device, :open_ports, :private, :type, :up_date, :date, :attacks);";
+                // $stmt = $conn->prepare($sql);
+                // $stmt->execute([':oui' => $row->macPrefix, ':mac' => $mac, ':ip' => $ip, ':mark' => $row->vendorName, ':device' => $device, ':open_ports' => $port, ':private' => $row->private, ':type' => $row->blockType, ':up_date' => $row->lastUpdate, ':date' => $date, ':attacks' => 1]);
             }
+            $sql = "CALL SP_Insert_All('$row->macPrefix', '$mac', '$ip', '$row->vendorName', '$device', '$port', '$row->private', '$row->blockType', '$row->lastUpdate', '$date', 1)";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
         }
         return true; // Devuelve true si almecenó en la Base de Datos los datos Buscados.
     }

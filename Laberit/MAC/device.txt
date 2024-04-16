@@ -1,0 +1,6 @@
+Servidor:  Docsis-Gateway.technicolor.net
+Address:  192.168.0.1
+
+Nombre:  Pixel-8.technicolor.net
+Address:  192.168.0.221
+

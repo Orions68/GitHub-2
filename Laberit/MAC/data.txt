@@ -1,11 +1,12 @@
-Starting Nmap 7.94 ( https://nmap.org ) at 2024-04-15 13:24 Hora de verano GMT
-Nmap scan report for 192.168.83.25
-Host is up (0.0069s latency).
-Not shown: 997 filtered tcp ports (no-response)
-PORT    STATE SERVICE
-135/tcp open  msrpc
-139/tcp open  netbios-ssn
-445/tcp open  microsoft-ds
-MAC Address: 04:D4:C4:32:54:E1 (ASUSTek Computer)
+Starting Nmap 7.94 ( https://nmap.org ) at 2024-04-15 17:13 Hora de verano GMT
+Nmap scan report for amazon-1d12799d7.technicolor.net (192.168.0.87)
+Host is up (0.015s latency).
+Not shown: 996 closed tcp ports (reset)
+PORT     STATE SERVICE
+1080/tcp open  socks
+8009/tcp open  ajp13
+8888/tcp open  sun-answerbook
+9080/tcp open  glrpc
+MAC Address: CC:F7:35:AC:B4:73 (Amazon Technologies)
 
-Nmap done: 1 IP address (1 host up) scanned in 5.57 seconds
+Nmap done: 1 IP address (1 host up) scanned in 2.68 seconds
