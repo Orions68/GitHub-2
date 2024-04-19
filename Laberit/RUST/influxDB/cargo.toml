@@ -1,0 +1,16 @@
+[package]
+name = "influxdata"
+version = "2.1.1"
+authors = ["Patrick & César <cmatelat@laberit.com>"]
+edition = "2021"
+description = "Accsee InfluxDB"
+license = "MIT"
+keywords = ["port", "scanning", "nmap"]
+categories = ["command-line-utilities"]
+readme="README.md"
+
+[dependencies]
+influxdb = { version = "0.7.2", features = ["derive"] }
+chrono = "0.4"
+tokio = { version = "1", features = ["full"] }
+derive-new = "0.5"
