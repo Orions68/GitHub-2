@@ -48,7 +48,7 @@ $client = new Client([
 
 
 
-$query = "from(bucket: \"MACDB\") |> range(start: -2h) |> filter(fn: (r) => r._measurement == \"persona\")";
+$query = "from(bucket: \"MACDB\") |> range(start: -3h) |> filter(fn: (r) => r._measurement == \"persona\")";
 $tables = $client->createQueryApi()->query($query, $org);
 
 $i = 0;
@@ -58,19 +58,26 @@ foreach ($tables as $table) {
     // echo "</pre>";
         foreach ($table->records as $record) {
         $time[$i] = $record->getTime();
-        for ($j = 0; $j < $i; $j++)
-        {
-            if ($time[$j] == $time[$i])
-            {
-                $measurement = $record->getMeasurement();
-                $field = $record->getField();
-                $value = $record->getValue();
-                print "<pre>$time $measurement: tiene: $field=$value</pre><br>";
-            }
-        }
+        $measurement[$i] = $record->getMeasurement();
+        $field[$i] = $record->getField();
+        $value[$i] = $record->getValue();
         $i++;
         // $time = $record->getTime();
         // var_export($table->records);
+    }
+}
+
+for ($i = 0; $i < count($time); $i++)
+{
+    for ($j = 0; $j < count($time) / 2; $j++)
+    {
+        if ($j != $i)
+        {
+            if ($time[$j] == $time[$i])
+            {
+                print "<pre>$time[$i] $measurement[$i]: tiene: $field[$i]=$value[$i] $field[$j] = $value[$j]</pre><br>";
+            }
+        }
     }
 }
 
