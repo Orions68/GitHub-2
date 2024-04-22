@@ -18,6 +18,12 @@ use InfluxDB2\Model\WritePrecision;
 
 if (isset($_POST["ip"]))
 {
+    // exec('start C:\\TOOLS\\InfluxDB\\influxd.exe');
+
+    // $result = exec('start influxd', $output, $return_var); 
+    // echo "Result: $result\n"; 
+    // echo "Output: " . implode("\n", $output) . "\n";
+
     $ip = $_POST["ip"];
 
     exec('nmap ' . $ip . ' > data.txt'); // Ejecuta la aplicación nmap pasándole la IP y redirecciona la salida al fichero data.txt.
