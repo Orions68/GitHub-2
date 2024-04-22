@@ -3,27 +3,12 @@ require "vendor/autoload.php";
 
 include "includes/conn.php";
 
-// use InfluxDB2\Client;
 use InfluxDB2\Model\WritePrecision;
-
-// $org = 'FP';
-// $bucket = 'MACDB';
-
-// $client = new Client([
-//     "url" => "http://localhost:8086",
-//     "token" => $_ENV["INFLUX_TOKEN"],
-// ]);
 
 // use InfluxDB2\Point; // Se Usa para el Segundo caso de Inserción de Datos en la Base de Datos.
 
 if (isset($_POST["ip"]))
 {
-    // exec('start C:\\TOOLS\\InfluxDB\\influxd.exe');
-
-    // $result = exec('start influxd', $output, $return_var); 
-    // echo "Result: $result\n"; 
-    // echo "Output: " . implode("\n", $output) . "\n";
-
     $ip = $_POST["ip"];
 
     exec('nmap ' . $ip . ' > data.txt'); // Ejecuta la aplicación nmap pasándole la IP y redirecciona la salida al fichero data.txt.
@@ -90,6 +75,7 @@ function loadFile($ip) // Carga el Fichero data.txt en Memoria y Obtiene los Dat
     return $mac[2]; // Retorna la posición 2 del Array $mac.
 }
 
+/* Para Escribir en InfluxDB usando la clase Point, es necesario incluir la ruta con USE de Composer. */
 // $point = Point::measurement('mem')
 //   ->addTag('host', 'host1')
 //   ->addField('used_percent', 23.43234543)
@@ -97,6 +83,7 @@ function loadFile($ip) // Carga el Fichero data.txt en Memoria y Obtiene los Dat
 
 // $writeApi->write($point, WritePrecision::S, $bucket, $org);
 
+/* Para Escribir en InfluxDB usando un Array. */
 // $dataArray = ['name' => 'cpu',
 //   'tags' => ['host' => 'server_nl', 'region' => 'us'],
 //   'fields' => ['internal' => 5, 'external' => 6],

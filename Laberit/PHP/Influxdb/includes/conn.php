@@ -7,6 +7,6 @@ $bucket = 'MACDB';
 
 $client = new Client([
     "url" => "http://localhost:8086",
-    "token" => $_ENV["INFLUX_TOKEN"],
+    "token" => $_ENV["INFLUXSVC_TOKEN"],
 ]);
 ?>
