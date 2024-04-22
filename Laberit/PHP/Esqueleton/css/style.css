@@ -1,0 +1,19 @@
+table /* Personalizo la tabla con borde rojo y tamaño de la fuente también a 1.3 rem, con width 100%. */
+{
+    border-collapse: unset; /* Esta linea rompe el control del estilo de Bootstrap. */
+    border: 1px solid red;
+    font-size: 1.3rem;
+    width: 100%;
+}
+
+th
+{
+    border: 2px solid green;
+    font-size: 1.3rem;
+}
+
+td /* A las columnas de la tabla les doy borde de color azul y el tamaño de la fuente a 1.3 rem. */
+{
+    border: 1px solid blue;
+    font-size: 1.3rem;
+}

@@ -1,0 +1,10 @@
+Starting Nmap 7.94 ( https://nmap.org ) at 2024-04-22 11:24 Hora de verano GMT
+Nmap scan report for 192.168.83.23
+Host is up (0.0057s latency).
+Not shown: 998 filtered tcp ports (no-response)
+PORT     STATE SERVICE
+135/tcp  open  msrpc
+2179/tcp open  vmrdp
+MAC Address: B0:3C:DC:A7:AC:42 (Intel Corporate)
+
+Nmap done: 1 IP address (1 host up) scanned in 5.57 seconds
