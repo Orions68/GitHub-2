@@ -108,7 +108,7 @@ include "includes/nav_index.html";
                             $measurement[$i] = $record->getMeasurement();
                             $field[$i] = $record->getField();
                             $value[$i] = $record->getValue();
-                            $ip_tag[$i] = $record->getIp();
+                            $ip_tag[$i] = $record->getIp(); // Funciones Agregadas por mi. Se puede usar la Función getRecordValue(string $data) y Pasarle la Columna Necesaria, ip o mac o el nombre que se le de al tag.
                             $mac_tag[$i] = $record->getMac();
                             $i++;
                         }
@@ -126,7 +126,7 @@ include "includes/nav_index.html";
                         echo "<script>toat(0, 'Sin Datos Aun', 'No Hay Datos de la Última Hora.');</script>";
                     }
                     ?>
-                    <!-- <br style="marging-bottom: 100px;"> -->
+                    <br><br><br>
                 </div>
             </div>
         <div class="col-md-1"></div>
