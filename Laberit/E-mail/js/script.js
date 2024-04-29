@@ -1,62 +1,125 @@
-function totNumPages() // Función para la paginación
+function totNumPages1() // Función para la paginación
 {
-    return Math.ceil(window.length / window.qtty); // Calcula la cantidad de páginas que habrá, divide la cantidad de datos por 5 resultados a mostrar por página.
+    return Math.ceil(window.no / window.qtty_no); // Calcula la cantidad de páginas que habrá, divide la cantidad de datos por 5 resultados a mostrar por página.
 }
 
-function prev() // Función para ir a la página anterior.
+function prev1() // Función para ir a la página anterior.
 {
-    if (window.page > 1) // Si la página actual es mayor que la página 1.
+    if (window.page_no > 1) // Si la página actual es mayor que la página 1.
     {
-        window.page--; // Decrementa la variable page, página anterior.
-        change(window.page, window.qtty); // Llama a la función change pasandole el número de página a mostrar y la cantidad de datos a mostrar que siempre es 5.
+        window.page_no--; // Decrementa la variable page, página anterior.
+        change(window.page_no, window.qtty_no);
     }
 }
 
-function next() // La Función next muestra la página siguiente.
-{   
-    if (window.page < totNumPages()) // Si la página en la que estoy es menor que la última.
+function next1() // La Función next muestra la página siguiente.
+{
+    if (window.page_no < totNumPages()) // Si la página en la que estoy es menor que la última.
     {
-        window.page++; // Incremento la página
-        change(window.page, window.qtty); // Llamo a la función que muestra los resultados.
+        window.page_no++; // Incremento la página
+        change(window.page_no, window.qtty_no);
     }
 }
 
-function change(page, qtty) // Función que muestra los resultados de a 5 en la tabla, recibe la página page, la cantidad de resultados a mostrar qtty y true si viene de index y false si viene de profile.
+function change1(page1, qtty1) // Función que muestra los resultados de a 5 en la tabla, recibe la página page, la cantidad de resultados a mostrar qtty y true si viene de index y false si viene de profile.
 {
-    window.page = page; // Asigno la variable page, a la variable global window.page.
-    window.qtty = qtty; // Asigno la variable qtty, a la variable global window.qtty.
-    var length = oui.length; // Necesito el tamaño del array de servicios(Los Servicios en la Base de Datos).
-    window.length = length; // Hago global la variable length.
+    window.page_no = page1; // Asigno la variable page, a la variable global window.page.
+    window.qtty_no = qtty1; // Asigno la variable qtty, a la variable global window.qtty.
+    var no = no_email.length; // El Tamaño del Array de los Mensajes que NO Llegaron.
+    window.no = no; // Hago global la variable no.
+    var html1 = "<table><tr><th>Nada de :</th></tr>";
 
-    var html = "<table><tr><th>OUI</th><th>Dirección MAC</th><th>Fabricante</th><th>IP</th><th>Dispositivo</th><th>Puertos</th><th>Privada</th><th>Tipo</th><th>Actualizada</th><th>Ataques</th><th>Fecha</th></tr>";
-    for (i = (page - 1) * qtty; i < page * qtty; i++) // Aquí hago el bucle desde la página donde esté, a la cantidad de resultados a mostrar.
+    for (i = (page1 - 1) * qtty1; i < page1 * qtty1; i++) // Aquí hago el bucle desde la página donde esté, a la cantidad de resultados a mostrar.
     {
-        if (i < length) // Si i es menor que el tamaño del array.
+        if (i < no) // Si i es menor que el tamaño del array.
         {
-            html += "<tr><td>" + oui[i] + "</td><td>" + mac[i] + "</td><td>" + mark[i] + "</td><td>" + ip[i] + "</td><td>" + device[i] + "</td><td>" + port[i] + "</td><td>" + private[i] + "</td><td>" + type[i] + "</td><td>" + update[i] + "</td><td>" + attacks[i] + "</td><td>" + date[i] + "</td></tr>";
+            html1 += "<tr><td>" + no_email[i] + "</td></tr>";
         }
     }
-    html += "</table>";
-    table.innerHTML = html; // Muestro todo en pantalla.
+    html1 += "</table>";
+    table1.innerHTML = html1; // Muestro todo en pantalla.
 
-    if (length > 5) // Si la cantidad de Artículos es mayor que 5.
+    if (no > 8) // Si la cantidad de Artículos es mayor que 5.
     {
-        pages.innerHTML = "Página: " + page; // Muestro el número de página.
-        if (page == 1) // Si la página es la número 1
+        pages1.innerHTML = "Página: " + page1; // Muestro el número de página.
+        if (page1 == 1) // Si la página es la número 1
         {
-            prev_btn.style.visibility = "hidden"; // Escondo el Botón con id prev que mostraría los resultados anteriores.
+            prev_btn1.style.visibility = "hidden"; // Escondo el Botón con id prev que mostraría los resultados anteriores.
         }
         else // Si no, estoy en otra página.
         {
-            prev_btn.style.visibility = "visible"; // Hago visible el botón para mostrar los resultados anteriores.
+            prev_btn1.style.visibility = "visible"; // Hago visible el botón para mostrar los resultados anteriores.
         }
-        if (page == totNumPages()) // Si estoy en la última página.
+        if (page1 == totNumPages()) // Si estoy en la última página.
         {
-            next_btn.style.visibility = "hidden"; // Escondo el botón para mostrar los resultados siguientes.
+            next_btn1.style.visibility = "hidden"; // Escondo el botón para mostrar los resultados siguientes.
         }
         else // Si no, estoy en una página intermedia o en la primera.
         {
-            next_btn.style.visibility = "visible"; // Hago visible el botón para mostrar los resultados siguientes.
+            next_btn1.style.visibility = "visible"; // Hago visible el botón para mostrar los resultados siguientes.
+        }
+    }
+}
+
+function totNumPages2() // Función para la paginación
+{
+    return Math.ceil(window.yes / window.qtty_yes); // Calcula la cantidad de páginas que habrá, divide la cantidad de datos por 5 resultados a mostrar por página.
+}
+
+function prev2() // Función para ir a la página anterior.
+{
+    if (window.page_yes > 1) // Si la página actual es mayor que la página 1.
+    {
+        window.page_yes--; // Decrementa la variable page, página anterior.
+        change(window.page_yes, window.qtty_yes);
+    }
+}
+
+function next2() // La Función next muestra la página siguiente.
+{
+    if (window.page_yes < totNumPages()) // Si la página en la que estoy es menor que la última.
+    {
+        window.page_yes++; // Incremento la página
+        change(window.page_yes, window.qtty_yes);
+    }
+}
+
+function change2(page2, qtty2)
+{
+    window.page_yes = page2; // Asigno la variable page, a la variable global window.page.
+    window.qtty_yes = qtty2; // Asigno la variable qtty, a la variable global window.qtty.
+    var yes = address.length; // El Tamaño del Array de los Mensajes que Llegaron.
+    window.yes = yes; // Hago global la variable yes.
+    var html2 = "<table><tr><th>Dirección</th><th>Asunto</th></tr>";
+
+    for (i = (page2 - 1) * qtty2; i < page2 * qtty2; i++) // Aquí hago el bucle desde la página donde esté, a la cantidad de resultados a mostrar.
+    {
+        if (i < yes) // Si i es menor que el tamaño del array.
+        {
+            html2 += "<tr><td>" + address[i] + "</td><td>" + subject[i] + "</td></tr>";
+        }
+    }
+    html2 += "</table>";
+    table2.innerHTML = html2; // Muestro todo en pantalla.
+
+    if (yes > 8) // Si la cantidad de Artículos es mayor que 5.
+    {
+        pages2.innerHTML = "Página: " + page2; // Muestro el número de página.
+        if (page2 == 1) // Si la página es la número 1
+        {
+            prev_btn2.style.visibility = "hidden"; // Escondo el Botón con id prev que mostraría los resultados anteriores.
+        }
+        else // Si no, estoy en otra página.
+        {
+            prev_btn2.style.visibility = "visible"; // Hago visible el botón para mostrar los resultados anteriores.
+        }
+        if (page2 == totNumPages2()) // Si estoy en la última página.
+        {
+            next_btn2.style.visibility = "hidden"; // Escondo el botón para mostrar los resultados siguientes.
+        }
+        else // Si no, estoy en una página intermedia o en la primera.
+        {
+            next_btn2.style.visibility = "visible"; // Hago visible el botón para mostrar los resultados siguientes.
         }
     }
 }
