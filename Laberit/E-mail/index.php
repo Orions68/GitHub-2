@@ -61,13 +61,12 @@ include "includes/nav_index.html";
                             }
                             $qtty--; // Decremento la Cantidad de Mensajes.
                         }
-
                         imap_close($mailbox); // Función que Cierra la Conexión.
                         $sql = "SELECT COUNT(email) FROM email;"; // Cuento la Cantidad de E-mails en la Base de Datos.
                         $stmt = $conn->prepare($sql);
                         $stmt->execute();
                         $number = $stmt->fetchColumn(); // Obtengo la Cantidad de Direcciones.
-                        if (count($yes_email) < $number) // Si la Cantidad de Mensajes que Llegaron es Menor que las Direcciones a Monitorizar.
+                        if (count($yes_email) < $number || $yes_email == null) // Si la Cantidad de Mensajes que Llegaron es Menor que las Direcciones a Monitorizar.
                         {
                             $i = 0; // Índice de las Direcciones de E-mail que Llegaron.
                             $j = 0; // Índice de las Direcciones que no Llegaron.
