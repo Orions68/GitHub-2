@@ -2,7 +2,7 @@
 include "includes/conn.php";
 $title = "Monitor de E-mails.";
 include "includes/header.php";
-include "includes/modal_index.html";
+include "includes/modal.html";
 include "includes/nav_index.html";
 ?>
 <section class="container-fluid pt-3">
@@ -126,6 +126,18 @@ include "includes/nav_index.html";
                     <button onclick="next2()" id="next_btn2" class="btn btn-primary" style="visibility: hidden;">Siguientes Resultados</button><br>
                     <script>change2(1, 8);</script>
                     <br><br><br><br>
+                </div>
+                <div id="view3">
+                    <br><br><br><br>
+                    <h3>Agregar Direcciones de E-mail</h3>
+                    <br><br>
+                    <form action="addemail.php" method="post">
+                        <fieldset>
+                            <legend>Agrega una Dirección</legend>
+                            <label><input type="text" name="email"> E-mail</label>
+                            <br><br>
+                            <input type="submit" value="Almacena">
+                        </fieldset>
                 </div>
             </div>
         <div class="col-md-1"></div>

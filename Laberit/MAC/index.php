@@ -17,6 +17,16 @@ include "includes/nav_index.html";
                         <form action="review.php" method="post">
                         <label><input type="text" name="ip" required> IP Address</label>
                         <br><br>
+                        <label><input type="text" name="mac" required> MAC Address</label>
+                        <br><br>
+                        <label><input type="text" name="local_port" required> Puerto Local</label>
+                        <br><br>
+                        <label><input type="text" name="remote_port" required> Puerto Remoto</label>
+                        <br><br>
+                        <label><input type="text" name="protocol" required> Protocolo de Conexión</label>
+                        <br><br>
+                        <label><input type="text" name="packet" required> Tamaño del Paquete</label>
+                        <br><br>
                         <input type="submit" onclick="wait();" value="Verifica">
                         </form>
                     </fieldset>
