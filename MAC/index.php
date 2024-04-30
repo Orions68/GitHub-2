@@ -18,6 +18,16 @@ include "includes/nav_index.html";
                         <form action="review.php" method="post">
                         <label><input type="text" name="ip" required> IP Address</label>
                         <br><br>
+                        <label><input type="text" name="mac" required> MAC Address</label>
+                        <br><br>
+                        <label><input type="text" name="local_port" required> Puerto Local</label>
+                        <br><br>
+                        <label><input type="text" name="remote_port" required> Puerto Remoto</label>
+                        <br><br>
+                        <label><input type="text" name="protocol" required> Protocolo de Conexión</label>
+                        <br><br>
+                        <label><input type="number" name="packet" required> Tamaño del Paquete</label>
+                        <br><br>
                         <input type="submit" onclick="wait();" value="Verifica" class="btn btn-primary">
                         </form>
                     </fieldset>
@@ -108,8 +118,13 @@ include "includes/nav_index.html";
                             $measurement[$i] = $record->getMeasurement();
                             $field[$i] = $record->getField();
                             $value[$i] = $record->getValue();
-                            $ip_tag[$i] = $record->getIp(); // Funciones Agregadas por mi. Se puede usar la Función getRecordValue(string $data) y Pasarle la Columna Necesaria, ip o mac o el nombre que se le de al tag.
-                            $mac_tag[$i] = $record->getMac();
+                            // $ip_tag[$i] = $record->getIp(); // Funciones Agregadas por mi. Se puede usar la Función getRecordValue(string $data) y Pasarle la Columna Necesaria, ip o mac o el nombre que se le de al tag.
+                            // $mac_tag[$i] = $record->getMac();
+                            $ip_tag[$i] = $record->getRecordValue("ip");
+                            $mac_tag[$i] = $record->getRecordValue("mac");
+                            $l_port[$i] = $record->getRecordValue("localPort");
+                            $r_port[$i] = $record->getRecordValue("remotePort");
+                            $protocol[$i] = $record->getRecordValue("protocol");
                             $i++;
                         }
                     }
@@ -118,7 +133,7 @@ include "includes/nav_index.html";
                     {
                         for ($i = 0; $i < count($time); $i++)
                         {
-                            echo "<pre>$time[$i] $measurement[$i] con IP: $ip_tag[$i] con Mac: $mac_tag[$i] Es: $field[$i] = $value[$i]</pre><br>";
+                            echo "<pre>$time[$i] $measurement[$i] con IP: $ip_tag[$i] con Mac: $mac_tag[$i] Desde el Puerto: $l_port[$i] Conectado al Puerto: $r_port[$i] Mediante el Protcolo: $protocol[$i] Es: $field[$i] = $value[$i]</pre><br>";
                         }
                     }
                     else

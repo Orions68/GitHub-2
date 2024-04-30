@@ -77,15 +77,15 @@ class FluxRecord implements ArrayAccess
         return $this->getRecordValue('_measurement');
     }
 	
-	public function getIp(): string
-    {
-        return $this->getRecordValue('ip');
-    }
+	// public function getIp(): string
+    // {
+    //     return $this->getRecordValue('ip');
+    // }
 	
-	public function getMac(): string
-    {
-        return $this->getRecordValue('mac');
-    }
+	// public function getMac(): string
+    // {
+    //     return $this->getRecordValue('mac');
+    // }
 
     /**
      * Get record value.
@@ -94,7 +94,8 @@ class FluxRecord implements ArrayAccess
      * @return mixed the value of column
      * @throws RuntimeException when the record doesn't contain required column
      */
-    private function getRecordValue(string $column)
+    // private function getRecordValue(string $column)
+    public function getRecordValue(string $column)
     {
         if (array_key_exists($column, $this->values)) {
             return $this->values[$column];
