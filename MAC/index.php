@@ -125,6 +125,7 @@ include "includes/nav_index.html";
                             $l_port[$i] = $record->getRecordValue("localPort");
                             $r_port[$i] = $record->getRecordValue("remotePort");
                             $protocol[$i] = $record->getRecordValue("protocol");
+                            $oui[$i] = $record->getRecordValue("oui");
                             $i++;
                         }
                     }
@@ -133,7 +134,7 @@ include "includes/nav_index.html";
                     {
                         for ($i = 0; $i < count($time); $i++)
                         {
-                            echo "<pre>$time[$i] $measurement[$i] con IP: $ip_tag[$i] con Mac: $mac_tag[$i] Desde el Puerto: $l_port[$i] Conectado al Puerto: $r_port[$i] Mediante el Protcolo: $protocol[$i] Es: $field[$i] = $value[$i]</pre><br>";
+                            echo "<pre>$time[$i] $measurement[$i] con IP: $ip_tag[$i] con Mac: $mac_tag[$i] Desde el Puerto: $l_port[$i] Conectado al Puerto: $r_port[$i] Mediante el Protcolo: $protocol[$i] con la OUI: $oui[$i] Es: $field[$i] = $value[$i]</pre><br>";
                         }
                     }
                     else

@@ -69,10 +69,11 @@ if (isset($_POST["ip"])) // Recibe la IP desde el script index.php por POST.
     else
     {
         $mark = "Android, IOS, Virtual";
+        $oui = $mac;
         $private = true;
     }
     $writeApi = $client->createWriteApi();
-    $data = "intruder,ip=$ip,mac=$mac,protocol=$protocol,localPort=$local_port,remotePort=$remote_port mark=\"$mark\",length=$length"; // Los Tags en Influx no pueden tener espacios.
+    $data = "intruder,ip=$ip,mac=$mac,protocol=$protocol,localPort=$local_port,remotePort=$remote_port,oui=$oui mark=\"$mark\",length=$length"; // Los Tags en Influx no pueden tener espacios.
     $writeApi->write($data, WritePrecision::S, $bucket, $org);
 
     $client->close();

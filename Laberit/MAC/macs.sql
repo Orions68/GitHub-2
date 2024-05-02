@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `macs` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `macs`;
 
-DELIMITER $$
+/* DELIMITER $$
 --
 -- Procedimientos
 --
@@ -43,7 +43,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_Same_IP` (IN `in_ip` VARCHAR(15)
 SELECT oui FROM intruder WHERE ip=in_ip;
 END$$
 
-DELIMITER ;
+DELIMITER ; */
 
 -- --------------------------------------------------------
 
