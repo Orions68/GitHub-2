@@ -1,0 +1,10 @@
+Starting Nmap 7.94 ( https://nmap.org ) at 2024-04-24 09:53 Hora de verano GMT
+Nmap scan report for 192.168.83.25
+Host is up (0.0063s latency).
+Not shown: 998 closed tcp ports (reset)
+PORT      STATE SERVICE
+49152/tcp open  unknown
+62078/tcp open  iphone-sync
+MAC Address: 62:D8:72:28:CC:20 (Unknown)
+
+Nmap done: 1 IP address (1 host up) scanned in 1.57 seconds

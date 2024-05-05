@@ -1,0 +1,25 @@
+START TRANSACTION;
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_Get_All` (IN `oui` VARCHAR(13))   BEGIN
+SELECT * FROM mac WHERE macPrefix=oui;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_Insert_All` (IN `in_out` VARCHAR(13), IN `in_mac` VARCHAR(17), IN `in_ip` VARCHAR(15), IN `in_mark` VARCHAR(128), IN `in_device` VARCHAR(64), IN `in_open_ports` VARCHAR(4096), IN `in_private` BOOLEAN, IN `in_type` VARCHAR(4), IN `in_up_date` DATE, IN `in_date` DATETIME, IN `in_attacks` INT(11))   BEGIN
+INSERT INTO intruder VALUES(in_oui, in_mac, in_ip, in_mark, in_device, in_open_ports, in_private, in_type, in_up_date, in_date, in_attacks);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_Reincident` (IN `in_mac` VARCHAR(17), IN `in_ip` VARCHAR(15))   BEGIN
+SELECT oui FROM intruder WHERE mac=in_mac AND ip=in_ip;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_Same_IP` (IN `in_ip` VARCHAR(15))   BEGIN
+SELECT oui FROM intruder WHERE ip=in_ip;
+END$$
+
+DELIMITER ;
+
+COMMIT;
