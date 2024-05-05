@@ -37,7 +37,7 @@ include "includes/nav_index.html";
                     <h3>Lista de datos de InfluxDB:</h3>
                     <br><br>
                     <?php
-                    $query = "from(bucket: \"MACDB\") |> range(start: -6h) |> filter(fn: (r) => r._measurement == \"intruder\")"; // Consulta a Influx los datos, 2 horas antes.
+                    $query = "from(bucket: \"MACDB\") |> range(start: -6h) |> filter(fn: (r) => r._measurement == \"intruder\")"; // Consulta a Influx los datos, 6 horas antes.
                     $tables = $client->createQueryApi()->query($query, $org);
                     $time = [];
                     $records = [];
@@ -53,30 +53,24 @@ include "includes/nav_index.html";
 
                     if (count($records) > 0) // Si hay Datos.
                     {
-                        $i = 0;
-                        $z = 0;
-                        echo "<script>var ip = [];
-                                        var mac = [];
-                                        var l_port = [];
-                                        var r_port = [];
-                                        var protocol = [];
-                                        var oui = [];
-                                        var array_key = [];
-                                        var array_value = [];</script>";
+                        $i = 0; //Índeice de los Valores y las Tags.
+                        $z = false; // Controla que las Tags se Almacenen Solo una Vez.
+                        echo "<script>var array_key = [];
+                                    var array_value = [];</script>";
                         foreach($records as $key) // Bucle para obtener las keys.
                         {
-                            $z++;
                             echo "<h5>"; // Formato del texto.
                             foreach ($key as $value) // Bucle para obtener los valores.
                             {
-                                if ($z == 1)
+                                if (!$z)
                                 {
-                                    echo "<script>array_key[" . $i . "] = '" . key($key) . "';</script>";
+                                    echo "<script>array_key[" . $i . "] = '" . key($key) . "';</script>"; // Alamcena la tag en el Array array_key.
                                 }
-                                echo "<script>array_value[" . $i . "] = '" . $value . "';</script>";
+                                echo "<script>array_value[" . $i . "] = '" . $value . "';</script>"; // Alamacena el valor en el Array array_value.
                                 next($key); // Siguiente Clave.
-                                $i++;
+                                $i++; // Incrementa el Índice.
                             }
+                            $z = true;
                             echo "</h5>";
                         }
                     }
@@ -84,11 +78,11 @@ include "includes/nav_index.html";
                     {
                         echo "<script>toast(0, 'Sin Datos Aun', 'No Hay Datos de la Última Hora.');</script>";
                     }
-                    for ($j = 0; $j < $i; $j++)
-                    {
-                        echo "<script>console.log('Los Datos Son: ' + array_key[" . $j . "]);</script>";
-                        echo "<script>console.log('Los Datos Son: ' + array_value[" . $j . "]);</script>";
-                    }
+                    // for ($j = 0; $j < $i; $j++)
+                    // {
+                    //     echo "<script>console.log('Los Datos Son: ' + array_key[" . $j . "]);</script>";
+                    //     echo "<script>console.log('Los Datos Son: ' + array_value[" . $j . "]);</script>";
+                    // }
                     ?>
                     <div id="table"></div>
                     <br>
