@@ -26,6 +26,10 @@ include "includes/nav_index.html";
                         $temp = explode(" ", $date); // Exploto la fecha en el Array $temp.
                         for ($i = 0; $i < 4; $i++) // Bucle hasta 4 para obtener los 4 primeros datos del Array $temp, Nombre del Día, Día, Mes, Año.
                         {
+                            if (strlen($temp[$i]) == 1)
+                            {
+                                $temp[$i] = "0" . $temp[$i];
+                            }
                             $today .= $temp[$i]; // Concateno la Fecha en la Variable $today.
                         }
 
@@ -38,8 +42,13 @@ include "includes/nav_index.html";
                             $mail_temp = explode(" ", $mail_date); // Exploto la fecha en el Array $mail_temp.
                             for ($i = 0; $i < 4; $i++) // Bucle hasta 4 para obtener los 4 primeros datos del Array $temp, Nombre del Día, Día, Mes, Año.
                             {
+                                if (strlen($mail_temp[$i]) == 1)
+                                {
+                                    $mail_temp[$i] = "0" . $mail_temp[$i];
+                                }
                                 $mail_today .= $mail_temp[$i]; // Concateno la Fecha en la Variable $mail_today.
                             }
+
                             if ($today == $mail_today) // Si los Mensajes son de Hoy, $today = a los Mensajes del Día.
                             {
                                 $sql = "SELECT email FROM email WHERE email='" . $address[$index_ok] . "';"; // Selecciono las Direcciones de la Base de Datos de E-mails.

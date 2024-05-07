@@ -153,7 +153,7 @@ function toast(warn, ttl, msg) // Función para mostrar el Diálogo con los mens
 
 function screenSize() // Función para dar el tamaño máximo de la pantalla a las vistas.
 {
-    let view3 = document.getElementById("view3");
+    let view4 = document.getElementById("view4");
     let height = window.innerHeight; // window.innerHeight es el tamaño vertical de la pantalla.
 
     if (view1.offsetHeight < height) // Si el tamaño vertical de la vista es menor que el tamaño vertical de la pantalla.
