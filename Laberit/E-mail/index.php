@@ -68,6 +68,7 @@ include "includes/nav_index.html";
                             }
                             $qtty--; // Decremento la Cantidad de Mensajes.
                         }
+                        $body = "<PRE>" . imap_body($mailbox, 1) . "</PRE><HR>";
                         imap_close($mailbox); // Función que Cierra la Conexión.
                         $sql = "SELECT COUNT(email) FROM email;"; // Cuento la Cantidad de E-mails en la Base de Datos.
                         $stmt = $conn->prepare($sql);
@@ -127,6 +128,7 @@ include "includes/nav_index.html";
                             echo "<script>address[" . $i . "] = '" . $address[$i] . "';
                             subject[" . $i . "] = '" . $subject[$i] . "';</script>";
                         }
+                        echo $body;
                     ?>
                     <div id="table2"></div>
                     <br>
