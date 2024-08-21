@@ -1,1 +1,0 @@
-Proyecto para escribir y leer InfluxDB.
